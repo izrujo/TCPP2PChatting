@@ -18,6 +18,92 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Chatting\ChattingApp.cpp" />
+    <ClCompile Include="Chatting\ChattingForm.cpp" />
+    <ClCompile Include="Chatting\ClientSocket.cpp" />
+    <ClCompile Include="Chatting\ListenSocket.cpp" />
+    <ClCompile Include="TextEditor\Caret.cpp" />
+    <ClCompile Include="TextEditor\CaretController.cpp" />
+    <ClCompile Include="TextEditor\CharacterMetrics.cpp" />
+    <ClCompile Include="TextEditor\Characters.cpp" />
+    <ClCompile Include="TextEditor\CNTCommandFactory.cpp" />
+    <ClCompile Include="TextEditor\CNTCommands.cpp" />
+    <ClCompile Include="TextEditor\CNTKeyActionFactory.cpp" />
+    <ClCompile Include="TextEditor\CNTKeyActions.cpp" />
+    <ClCompile Include="TextEditor\Composite.cpp" />
+    <ClCompile Include="TextEditor\DrawingVisitor.cpp" />
+    <ClCompile Include="TextEditor\DummyLine.cpp" />
+    <ClCompile Include="TextEditor\DummyManager.cpp" />
+    <ClCompile Include="TextEditor\FindReplaceDialog.cpp" />
+    <ClCompile Include="TextEditor\Font.cpp" />
+    <ClCompile Include="TextEditor\Glyph.cpp" />
+    <ClCompile Include="TextEditor\GlyphFactory.cpp" />
+    <ClCompile Include="TextEditor\HistoryBook.cpp" />
+    <ClCompile Include="TextEditor\HScrollActionFactory.cpp" />
+    <ClCompile Include="TextEditor\HScrollActions.cpp" />
+    <ClCompile Include="TextEditor\Line.cpp" />
+    <ClCompile Include="TextEditor\Note.cpp" />
+    <ClCompile Include="TextEditor\Observer.cpp" />
+    <ClCompile Include="TextEditor\Scanner.cpp" />
+    <ClCompile Include="TextEditor\Scroll.cpp" />
+    <ClCompile Include="TextEditor\ScrollController.cpp" />
+    <ClCompile Include="TextEditor\Selection.cpp" />
+    <ClCompile Include="TextEditor\Subject.cpp" />
+    <ClCompile Include="TextEditor\TextEditingForm.cpp" />
+    <ClCompile Include="TextEditor\Visitor.cpp" />
+    <ClCompile Include="TextEditor\VScrollActionFactory.cpp" />
+    <ClCompile Include="TextEditor\VScrollActions.cpp" />
+    <ClCompile Include="Utilities\Stack.cpp" />
+    <ClCompile Include="Utilities\String.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chatting\ChattingApp.h" />
+    <ClInclude Include="Chatting\ChattingForm.h" />
+    <ClInclude Include="Chatting\ClientSocket.h" />
+    <ClInclude Include="Chatting\ListenSocket.h" />
+    <ClInclude Include="TextEditor\Caret.h" />
+    <ClInclude Include="TextEditor\CaretController.h" />
+    <ClInclude Include="TextEditor\CharacterMetrics.h" />
+    <ClInclude Include="TextEditor\Characters.h" />
+    <ClInclude Include="TextEditor\CNTCommandFactory.h" />
+    <ClInclude Include="TextEditor\CNTCommands.h" />
+    <ClInclude Include="TextEditor\CNTKeyActionFactory.h" />
+    <ClInclude Include="TextEditor\CNTKeyActions.h" />
+    <ClInclude Include="TextEditor\Composite.h" />
+    <ClInclude Include="TextEditor\DrawingVisitor.h" />
+    <ClInclude Include="TextEditor\DummyLine.h" />
+    <ClInclude Include="TextEditor\DummyManager.h" />
+    <ClInclude Include="TextEditor\FindReplaceDialog.h" />
+    <ClInclude Include="TextEditor\Font.h" />
+    <ClInclude Include="TextEditor\Glyph.h" />
+    <ClInclude Include="TextEditor\GlyphFactory.h" />
+    <ClInclude Include="TextEditor\HistoryBook.h" />
+    <ClInclude Include="TextEditor\HScrollActionFactory.h" />
+    <ClInclude Include="TextEditor\HScrollActions.h" />
+    <ClInclude Include="TextEditor\Line.h" />
+    <ClInclude Include="TextEditor\Note.h" />
+    <ClInclude Include="TextEditor\Observer.h" />
+    <ClInclude Include="TextEditor\resource.h" />
+    <ClInclude Include="TextEditor\Scanner.h" />
+    <ClInclude Include="TextEditor\Scroll.h" />
+    <ClInclude Include="TextEditor\ScrollController.h" />
+    <ClInclude Include="TextEditor\Selection.h" />
+    <ClInclude Include="TextEditor\Subject.h" />
+    <ClInclude Include="TextEditor\TextEditingForm.h" />
+    <ClInclude Include="TextEditor\Visitor.h" />
+    <ClInclude Include="TextEditor\VScrollActionFactory.h" />
+    <ClInclude Include="TextEditor\VScrollActions.h" />
+    <ClInclude Include="Utilities\Array.h" />
+    <ClInclude Include="Utilities\Stack.h" />
+    <ClInclude Include="Utilities\String.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TextEditor\TextEditingForm.aps" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TextEditor\TextEditingForm.rc" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -30,7 +116,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -138,9 +225,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="test.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

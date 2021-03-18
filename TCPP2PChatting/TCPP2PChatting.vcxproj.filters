@@ -1,22 +1,260 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Chatting">
+      <UniqueIdentifier>{14749b0a-7b26-48e3-89dd-9e133d87a89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextEditor">
+      <UniqueIdentifier>{1a77523e-5a22-4ce2-b006-b8f08750eaa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{9226adc4-bb80-4a3c-a9dc-c974c2aabfc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="TextEditor\Caret.cpp">
+      <Filter>TextEditor</Filter>
     </ClCompile>
+    <ClCompile Include="TextEditor\CaretController.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\CharacterMetrics.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Characters.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\CNTCommandFactory.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\CNTCommands.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\CNTKeyActionFactory.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\CNTKeyActions.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Composite.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\DrawingVisitor.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\DummyLine.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\DummyManager.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\FindReplaceDialog.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Font.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Glyph.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\GlyphFactory.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\HistoryBook.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\HScrollActionFactory.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\HScrollActions.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Line.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Note.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Observer.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Scanner.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Scroll.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\ScrollController.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Selection.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Subject.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\TextEditingForm.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Visitor.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\VScrollActionFactory.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\VScrollActions.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ChattingApp.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ChattingForm.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ClientSocket.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ListenSocket.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Stack.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\String.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextEditor\Caret.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CaretController.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CharacterMetrics.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Characters.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CNTCommandFactory.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CNTCommands.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CNTKeyActionFactory.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\CNTKeyActions.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Composite.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\DrawingVisitor.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\DummyLine.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\DummyManager.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\FindReplaceDialog.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Font.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Glyph.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\GlyphFactory.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\HistoryBook.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\HScrollActionFactory.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\HScrollActions.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Line.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Note.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Observer.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\resource.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Scanner.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Scroll.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\ScrollController.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Selection.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Subject.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\TextEditingForm.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\Visitor.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\VScrollActionFactory.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\VScrollActions.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ChattingApp.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ChattingForm.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ClientSocket.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ListenSocket.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Array.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Stack.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\String.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TextEditor\TextEditingForm.aps">
+      <Filter>TextEditor</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TextEditor\TextEditingForm.rc">
+      <Filter>TextEditor</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
