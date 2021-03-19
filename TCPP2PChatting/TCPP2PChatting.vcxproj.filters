@@ -157,6 +157,12 @@
     <ClCompile Include="Chatting\KeyActions.cpp">
       <Filter>Chatting</Filter>
     </ClCompile>
+    <ClCompile Include="Chatting\Packet.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\Chatter.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextEditor\Caret.h">
@@ -304,6 +310,12 @@
       <Filter>Chatting</Filter>
     </ClInclude>
     <ClInclude Include="Chatting\KeyActions.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\Packet.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\Chatter.h">
       <Filter>Chatting</Filter>
     </ClInclude>
   </ItemGroup>

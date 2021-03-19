@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chatting\ChatEditingForm.cpp" />
+    <ClCompile Include="Chatting\Chatter.cpp" />
     <ClCompile Include="Chatting\ChattingApp.cpp" />
     <ClCompile Include="Chatting\ChattingForm.cpp" />
     <ClCompile Include="Chatting\ClientSocket.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="Chatting\KeyActionFactory.cpp" />
     <ClCompile Include="Chatting\KeyActions.cpp" />
     <ClCompile Include="Chatting\ListenSocket.cpp" />
+    <ClCompile Include="Chatting\Packet.cpp" />
     <ClCompile Include="Chatting\Viewer.cpp" />
     <ClCompile Include="Graphics\GraphVisitors.cpp" />
     <ClCompile Include="Graphics\UIGraphFactory.cpp" />
@@ -68,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chatting\ChatEditingForm.h" />
+    <ClInclude Include="Chatting\Chatter.h" />
     <ClInclude Include="Chatting\ChattingApp.h" />
     <ClInclude Include="Chatting\ChattingForm.h" />
     <ClInclude Include="Chatting\ClientSocket.h" />
@@ -76,6 +79,7 @@
     <ClInclude Include="Chatting\KeyActionFactory.h" />
     <ClInclude Include="Chatting\KeyActions.h" />
     <ClInclude Include="Chatting\ListenSocket.h" />
+    <ClInclude Include="Chatting\Packet.h" />
     <ClInclude Include="Chatting\resource.h" />
     <ClInclude Include="Chatting\Viewer.h" />
     <ClInclude Include="Graphics\GraphVisitors.h" />

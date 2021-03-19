@@ -60,12 +60,8 @@ void SendCommand::Execute() {
 	}
 	GlyphFactory glyphFactory;
 	this->chattingForm->chattingEdit->note = glyphFactory.Make("");
-	Glyph* line = glyphFactory.Make("\r\n");
-	this->chattingForm->chattingEdit->note->Add(line);
-
-	Long index = this->chattingForm->chattingEdit->note->First();
-	this->chattingForm->chattingEdit->current = this->chattingForm->chattingEdit->note->GetAt(index);
-	this->chattingForm->chattingEdit->current->First();
+	this->chattingForm->chattingEdit->current = glyphFactory.Make("\r\n");
+	this->chattingForm->chattingEdit->note->Add(this->chattingForm->chattingEdit->current);
 
 	if (this->chattingForm->chattingEdit->scrollController != NULL) {
 		delete this->chattingForm->chattingEdit->scrollController;
