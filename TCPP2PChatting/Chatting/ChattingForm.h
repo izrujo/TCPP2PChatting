@@ -4,7 +4,9 @@
 #include <afxwin.h>
 
 class TextEditingForm;
+class ChatEditingForm;
 class Chatter;
+class UIGraph;
 
 class ChattingForm : public CFrameWnd {
 public:
@@ -13,8 +15,9 @@ public:
 
 public:
 	TextEditingForm* chattingView;
-	TextEditingForm* chattingEdit;
+	ChatEditingForm* chattingEdit;
 	Chatter* chatter;
+	UIGraph* sendButton;
 
 protected:
 	afx_msg void OnClose();
@@ -23,6 +26,7 @@ protected:
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg void OnKillFocus(CWnd* pNewWnd);
 	afx_msg void OnCommandRange(UINT uID);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	
 	DECLARE_MESSAGE_MAP()
 };

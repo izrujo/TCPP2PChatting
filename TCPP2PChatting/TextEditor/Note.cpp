@@ -287,7 +287,7 @@ string Note::GetContent() {
 			j++;
 		}
 		if (i < this->length - 1) {
-			content += "\n";
+			content += "\r\n";
 		}
 		i++;
 	}

@@ -13,6 +13,7 @@ void ListenSocket::OnAccept(int nErrorCode) {
 	this->clientSocket = new ClientSocket;
 	if (Accept(*this->clientSocket)) {
 		this->clientSocket->SetListenSocket(this);
+		//this->clientSocketList.AddTail(clientSocket);
 		AfxMessageBox(_T("Other Peer Connected!!"));
 	}
 	else {

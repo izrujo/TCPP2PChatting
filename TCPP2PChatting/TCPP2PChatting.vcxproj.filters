@@ -14,6 +14,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{9226adc4-bb80-4a3c-a9dc-c974c2aabfc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{83c70211-4814-4dc6-9653-0a79a0b021b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextEditor\Caret.cpp">
@@ -127,6 +130,33 @@
     <ClCompile Include="Utilities\String.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\GraphVisitors.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\UIGraphFactory.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\UIGraphs.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\Viewer.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\CommandFactory.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\Commands.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ChatEditingForm.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\KeyActionFactory.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\KeyActions.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextEditor\Caret.h">
@@ -195,9 +225,6 @@
     <ClInclude Include="TextEditor\Observer.h">
       <Filter>TextEditor</Filter>
     </ClInclude>
-    <ClInclude Include="TextEditor\resource.h">
-      <Filter>TextEditor</Filter>
-    </ClInclude>
     <ClInclude Include="TextEditor\Scanner.h">
       <Filter>TextEditor</Filter>
     </ClInclude>
@@ -246,15 +273,46 @@
     <ClInclude Include="Utilities\String.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TextEditor\TextEditingForm.aps">
+    <ClInclude Include="Graphics\GraphVisitors.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\UIGraphFactory.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\UIGraphs.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\Viewer.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\CommandFactory.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\Commands.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\resource.h">
       <Filter>TextEditor</Filter>
-    </None>
+    </ClInclude>
+    <ClInclude Include="Chatting\resource.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ChatEditingForm.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\KeyActionFactory.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\KeyActions.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TextEditor\TextEditingForm.rc">
       <Filter>TextEditor</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="Chatting\ChattingForm.rc">
+      <Filter>Chatting</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

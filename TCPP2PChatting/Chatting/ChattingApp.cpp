@@ -4,7 +4,7 @@
 BOOL ChattingApp::InitInstance() {
 	ChattingForm* chattingForm = new ChattingForm;
 	chattingForm->Create(NULL, "CNChatting");
-	chattingForm->ShowWindow(SW_MAXIMIZE);
+	chattingForm->ShowWindow(SW_SHOW);
 	chattingForm->UpdateWindow();
 	this->m_pMainWnd = chattingForm;
 

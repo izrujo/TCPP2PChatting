@@ -19,10 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Chatting\ChatEditingForm.cpp" />
     <ClCompile Include="Chatting\ChattingApp.cpp" />
     <ClCompile Include="Chatting\ChattingForm.cpp" />
     <ClCompile Include="Chatting\ClientSocket.cpp" />
+    <ClCompile Include="Chatting\CommandFactory.cpp" />
+    <ClCompile Include="Chatting\Commands.cpp" />
+    <ClCompile Include="Chatting\KeyActionFactory.cpp" />
+    <ClCompile Include="Chatting\KeyActions.cpp" />
     <ClCompile Include="Chatting\ListenSocket.cpp" />
+    <ClCompile Include="Chatting\Viewer.cpp" />
+    <ClCompile Include="Graphics\GraphVisitors.cpp" />
+    <ClCompile Include="Graphics\UIGraphFactory.cpp" />
+    <ClCompile Include="Graphics\UIGraphs.cpp" />
     <ClCompile Include="TextEditor\Caret.cpp" />
     <ClCompile Include="TextEditor\CaretController.cpp" />
     <ClCompile Include="TextEditor\CharacterMetrics.cpp" />
@@ -58,10 +67,20 @@
     <ClCompile Include="Utilities\String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chatting\ChatEditingForm.h" />
     <ClInclude Include="Chatting\ChattingApp.h" />
     <ClInclude Include="Chatting\ChattingForm.h" />
     <ClInclude Include="Chatting\ClientSocket.h" />
+    <ClInclude Include="Chatting\CommandFactory.h" />
+    <ClInclude Include="Chatting\Commands.h" />
+    <ClInclude Include="Chatting\KeyActionFactory.h" />
+    <ClInclude Include="Chatting\KeyActions.h" />
     <ClInclude Include="Chatting\ListenSocket.h" />
+    <ClInclude Include="Chatting\resource.h" />
+    <ClInclude Include="Chatting\Viewer.h" />
+    <ClInclude Include="Graphics\GraphVisitors.h" />
+    <ClInclude Include="Graphics\UIGraphFactory.h" />
+    <ClInclude Include="Graphics\UIGraphs.h" />
     <ClInclude Include="TextEditor\Caret.h" />
     <ClInclude Include="TextEditor\CaretController.h" />
     <ClInclude Include="TextEditor\CharacterMetrics.h" />
@@ -99,9 +118,7 @@
     <ClInclude Include="Utilities\String.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TextEditor\TextEditingForm.aps" />
-  </ItemGroup>
-  <ItemGroup>
+    <ResourceCompile Include="Chatting\ChattingForm.rc" />
     <ResourceCompile Include="TextEditor\TextEditingForm.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
