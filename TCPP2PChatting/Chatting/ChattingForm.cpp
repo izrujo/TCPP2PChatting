@@ -3,6 +3,7 @@
 #include "CommandFactory.h"
 #include "Commands.h"
 #include "ChatEditingForm.h"
+#include "Chatter.h"
 
 #include "resource.h"
 
@@ -29,6 +30,9 @@ ChattingForm::ChattingForm() {
 	this->chattingEdit = NULL;
 	this->chatter = NULL;
 	this->sendButton = NULL;
+	
+	this->ipAddress = "14.32.96.30";
+	this->portNumber = 2180;
 }
 
 int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -76,6 +80,9 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	UIGraphFactory uiFactory;
 	this->sendButton = uiFactory.Make(BUTTON, sendButtonRect.left, sendButtonRect.top,
 		sendButtonRect.Width(), sendButtonRect.Height(), "Send");
+
+	this->chatter = new Chatter(this);
+	//this->chatter->Call(this->ipAddress, this->portNumber);
 
 	//юс╫ц
 	Viewer viewer(this);

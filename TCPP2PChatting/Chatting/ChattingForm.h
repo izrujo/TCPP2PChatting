@@ -2,6 +2,8 @@
 #define _CHATTINGFORM_H
 
 #include <afxwin.h>
+#include <string>
+using namespace std;
 
 class TextEditingForm;
 class ChatEditingForm;
@@ -18,6 +20,9 @@ public:
 	ChatEditingForm* chattingEdit;
 	Chatter* chatter;
 	UIGraph* sendButton;
+
+	string ipAddress;
+	Long portNumber;
 
 protected:
 	afx_msg void OnClose();
