@@ -45,6 +45,16 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			this->clientSockets.GetNext(current);
 		}
 
+		previous = NULL;
+		current = this->clientSockets.GetHeadPosition();
+		while (previous != current && current != NULL) {
+			itSocket = (ClientSocket*)this->clientSockets.GetAt(current);
+			itSocket->SendData(new Packet(packet));
+
+			previous = current;
+			this->clientSockets.GetNext(current);
+		}
+
 		if (onIsFind != TRUE) {
 			newClient->SetServerSocket(this);
 			this->clientSockets.AddTail(newClient);
@@ -55,15 +65,6 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			AfxMessageBox(_T("Other Peer Connected!!"));
 		}
 
-		previous = NULL;
-		current = this->clientSockets.GetHeadPosition();
-		while (previous != current && current != NULL && onIsFind != TRUE) {
-			itSocket = (ClientSocket*)this->clientSockets.GetAt(current);
-			itSocket->SendData(new Packet(packet));
-
-			previous = current;
-			this->clientSockets.GetNext(current);
-		}
 	}
 	else {
 		delete newClient;
@@ -94,7 +95,7 @@ void ServerSocket::SendDataAll(Packet *packet) {
 	POSITION current = this->clientSockets.GetHeadPosition();
 	while (previous != current && current != NULL) {
 		client = (ClientSocket*)this->clientSockets.GetAt(current);
-		((ClientSocket*)client)->Send(packet, sizeof(*packet) + lstrlen(packet->GetContent().c_str()) * 2); //유니코드를 사용하므로 문자열 길이에 *2
+		((ClientSocket*)client)->Send(packet, sizeof(*packet) + lstrlen(packet->GetContent().c_str())); //유니코드를 사용하므로 문자열 길이에 *2
 		previous = current;
 		this->clientSockets.GetNext(current);
 	}
@@ -108,7 +109,7 @@ void ServerSocket::SendDataAll(TCHAR(*buffer), size_t len) {
 	while (position != NULL) {
 		client = (ClientSocket*)this->clientSockets.GetNext(position);
 		if (client != NULL) {
-			client->Send(buffer, len * 2); //유니코드를 사용하므로 문자열 길이에 *2
+			client->Send(buffer, len); //유니코드를 사용하므로 문자열 길이에 *2
 			//반환값은 *2한 값과 같아야 한다.
 		}
 	}

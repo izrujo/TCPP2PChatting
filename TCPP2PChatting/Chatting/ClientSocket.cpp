@@ -41,6 +41,7 @@ void ClientSocket::OnReceive(int nErrorCode){
 
 	Packet *packet = new Packet;
 	TCHAR buffer[1024];
+	ZeroMemory(buffer, sizeof(buffer));
 
 	Viewer viewer(this->serverSocket->chatter->chattingForm);
 
