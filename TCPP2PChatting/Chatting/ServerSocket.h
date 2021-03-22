@@ -18,7 +18,6 @@ public:
 	virtual void OnAccept(int nErrorCode);
 
 	void SendDataAll(Packet *packet);
-	void SendDataAll(TCHAR(*buffer), size_t len);
 	
 	void CloseClientSocket(ClientSocket *clientSocket);
 };

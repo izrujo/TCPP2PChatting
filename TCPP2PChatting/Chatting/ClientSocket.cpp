@@ -18,8 +18,17 @@ void ClientSocket::SetServerSocket(ServerSocket* serverSocket){
 	this->serverSocket = serverSocket;
 }
 
-void ClientSocket::SendData(Packet *packet) {
-	this->Send(packet, sizeof(*packet) + lstrlen(packet->GetContent().c_str()) * 2);
+void ClientSocket::SendData(Packet* packet) {
+	TCHAR(*buffer);
+	LONG len;
+
+	packet->GetPacketMessage(&buffer, &len);
+
+	this->Send(buffer, len);
+
+	if (buffer != 0) {
+		delete[] buffer;
+	}
 }
 
 void ClientSocket::OnReceive(int nErrorCode){
@@ -39,17 +48,17 @@ void ClientSocket::OnReceive(int nErrorCode){
 	ClientSocket *newClientSocket;
 	ClientSocket *itSocket;
 
-	Packet *packet = new Packet;
+	Packet packet;
+
 	TCHAR buffer[1024];
-	ZeroMemory(buffer, sizeof(buffer));
 
-	Viewer viewer(this->serverSocket->chatter->chattingForm);
-
+	LONG len;
 	LONG index;
 
 	GetPeerName(ipAddress, portNumber);
 	if (Receive(buffer, sizeof(buffer)) > 0) {
-		this->serverSocket->SendDataAll(buffer, sizeof(buffer));
+		packet = Packet(buffer);
+		this->serverSocket->SendDataAll(&packet);
 
 		current = this->serverSocket->clientSockets.GetHeadPosition();
 		while (previous != current && current != NULL && onIsFind != TRUE) {
@@ -65,13 +74,13 @@ void ClientSocket::OnReceive(int nErrorCode){
 		}
 
 		if (onIsFind != TRUE) {
-			strTemp = packet->GetIdentifier().c_str();
+			strTemp = packet.GetContent().c_str();
 
-			index = strTemp.Find(':', 0);
+			index = strTemp.Find(':');
 
-			ipAddress = strTemp.Left(index);
+			ipAddress = strTemp.Left(index); // :의 위치는 0베이스여서 index까지 잘라내면 됨.
 
-			strTemp = strTemp.Mid(index, strTemp.GetLength());
+			strTemp = strTemp.Mid(index + 1, strTemp.GetLength() - index - 1);
 			portNumber = _ttoi(strTemp);
 
 			newClientSocket = new ClientSocket;
@@ -79,17 +88,7 @@ void ClientSocket::OnReceive(int nErrorCode){
 
 			this->serverSocket->clientSockets.AddTail(newClientSocket);
 			newClientSocket->Connect(ipAddress, portNumber);
-
-			content.Format("%s가 접속했습니다.\n", packet->GetIdentifier().c_str());
-			viewer.View((LPCTSTR)content);
 		}
-		else {
-			viewer.View((LPCTSTR)packet->GetContent().c_str());
-		}
-	}
-
-	if (packet != 0) {
-		delete packet;
 	}
 
 	CSocket::OnReceive(nErrorCode);

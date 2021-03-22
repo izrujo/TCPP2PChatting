@@ -2,26 +2,32 @@
 #define _PACKET_H
 
 #include <string>
-
 using namespace std;
+
+typedef signed long int Long;
 
 class Packet {
 public:
-	Packet(string identifier = "", string content = "");
+	enum IDENTIFY { ID_ERROR = 0, ID_IP = 1, ID_CHAT = 2 };
+
+public:
+	Packet(string PacketMessage = "");
+	Packet(IDENTIFY identifier, string content);
 	Packet(const Packet& source);
 	~Packet();
 	Packet& operator=(const Packet& source);
 
-	string& GetIdentifier() const;
+	void GetPacketMessage(char*(*buffer), Long* length);
+	IDENTIFY GetIdentifier() const;
 	string& GetContent() const;
 
 private:
-	string identifier;
+	IDENTIFY identifier;
 	string content;
 };
 
-inline string& Packet::GetIdentifier() const {
-	return const_cast<string&>(this->identifier);
+inline Packet::IDENTIFY Packet::GetIdentifier() const {
+	return this->identifier;
 }
 
 inline string& Packet::GetContent() const {

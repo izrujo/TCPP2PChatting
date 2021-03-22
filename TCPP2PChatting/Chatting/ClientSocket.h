@@ -14,7 +14,7 @@ public:
 	virtual ~ClientSocket();
 
 	void SetServerSocket(ServerSocket* serverSocket);
-	void SendData(Packet *packet);
+	void SendData(Packet* packet);
 	//채팅 메시지를 받았을 때 호출된다. 메시지를 수신하고 연결된 모든 클라이언트에게 전송한다.
 	virtual void OnReceive(int nErrorCode);
 	//연결이 종료되는 시점에 호출된다.

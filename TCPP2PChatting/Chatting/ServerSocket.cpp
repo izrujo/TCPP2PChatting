@@ -19,6 +19,7 @@ void ServerSocket::OnAccept(int nErrorCode) {
 	POSITION previous = NULL;
 	POSITION current;
 
+	CString packetMessage;
 	CString ipAddress;
 	CString otherIPAddress;
 
@@ -32,6 +33,11 @@ void ServerSocket::OnAccept(int nErrorCode) {
 	if (onIsSucceed == TRUE) {
 		newClient->GetPeerName(ipAddress, portNumber);
 
+		// 패킷을 만든다.
+		packetMessage.Format("%d:%s:%d", Packet::ID_IP, ipAddress, portNumber);
+		packet = Packet((LPCTSTR)packetMessage);
+
+		// 새로운 클라이언트인지 찾아본다.
 		current = this->clientSockets.GetHeadPosition();
 		while (previous != current && current != NULL && onIsFind != TRUE) {// current가 NULL인지 확인하는건 디버깅해서 바꾸기.
 			itSocket = (ClientSocket*)this->clientSockets.GetAt(current);
@@ -45,26 +51,27 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			this->clientSockets.GetNext(current);
 		}
 
+		// 클라이언트들에게 새로운 클라이언트를 알려준다.
 		previous = NULL;
 		current = this->clientSockets.GetHeadPosition();
-		while (previous != current && current != NULL) {
+		while (previous != current && current != NULL && onIsFind != TRUE) {
 			itSocket = (ClientSocket*)this->clientSockets.GetAt(current);
-			itSocket->SendData(new Packet(packet));
+			itSocket->SendData(&packet);
 
 			previous = current;
 			this->clientSockets.GetNext(current);
 		}
 
+		// 새로운 클라이언트이면 설정해주고, 아니면 없앤다.
 		if (onIsFind != TRUE) {
 			newClient->SetServerSocket(this);
 			this->clientSockets.AddTail(newClient);
 
-			ipAddress.Format("%s:%d", (LPCTSTR)ipAddress, portNumber);
-			packet = Packet((LPCTSTR)ipAddress, (LPCTSTR)ipAddress);
-
 			AfxMessageBox(_T("Other Peer Connected!!"));
 		}
-
+		else {
+			delete newClient;
+		}
 	}
 	else {
 		delete newClient;
@@ -74,7 +81,7 @@ void ServerSocket::OnAccept(int nErrorCode) {
 	CAsyncSocket::OnAccept(nErrorCode);
 }
 
-void ServerSocket::CloseClientSocket(ClientSocket *clientSocket) {
+void ServerSocket::CloseClientSocket(ClientSocket* clientSocket) {
 	POSITION position;
 	position = this->clientSockets.Find(clientSocket); //리스트에서 소켓 선형 검색
 	if (position != NULL) {
@@ -88,29 +95,16 @@ void ServerSocket::CloseClientSocket(ClientSocket *clientSocket) {
 	}
 }
 
-void ServerSocket::SendDataAll(Packet *packet) {
+void ServerSocket::SendDataAll(Packet* packet) {
 	ClientSocket* client = NULL;
 
 	POSITION previous = NULL;
 	POSITION current = this->clientSockets.GetHeadPosition();
+
 	while (previous != current && current != NULL) {
 		client = (ClientSocket*)this->clientSockets.GetAt(current);
-		((ClientSocket*)client)->Send(packet, sizeof(*packet) + lstrlen(packet->GetContent().c_str())); //유니코드를 사용하므로 문자열 길이에 *2
+		((ClientSocket*)client)->SendData(packet);
 		previous = current;
 		this->clientSockets.GetNext(current);
-	}
-}
-
-void ServerSocket::SendDataAll(TCHAR(*buffer), size_t len) {
-	POSITION position;
-	position = this->clientSockets.GetHeadPosition();
-	ClientSocket* client = NULL;
-
-	while (position != NULL) {
-		client = (ClientSocket*)this->clientSockets.GetNext(position);
-		if (client != NULL) {
-			client->Send(buffer, len); //유니코드를 사용하므로 문자열 길이에 *2
-			//반환값은 *2한 값과 같아야 한다.
-		}
 	}
 }
