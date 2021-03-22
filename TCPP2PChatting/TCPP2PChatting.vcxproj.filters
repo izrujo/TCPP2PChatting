@@ -121,9 +121,6 @@
     <ClCompile Include="Chatting\ClientSocket.cpp">
       <Filter>Chatting</Filter>
     </ClCompile>
-    <ClCompile Include="Chatting\ListenSocket.cpp">
-      <Filter>Chatting</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\Stack.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -161,6 +158,9 @@
       <Filter>Chatting</Filter>
     </ClCompile>
     <ClCompile Include="Chatting\Chatter.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
+    <ClCompile Include="Chatting\ServerSocket.cpp">
       <Filter>Chatting</Filter>
     </ClCompile>
   </ItemGroup>
@@ -267,9 +267,6 @@
     <ClInclude Include="Chatting\ClientSocket.h">
       <Filter>Chatting</Filter>
     </ClInclude>
-    <ClInclude Include="Chatting\ListenSocket.h">
-      <Filter>Chatting</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\Array.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -316,6 +313,9 @@
       <Filter>Chatting</Filter>
     </ClInclude>
     <ClInclude Include="Chatting\Chatter.h">
+      <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ServerSocket.h">
       <Filter>Chatting</Filter>
     </ClInclude>
   </ItemGroup>

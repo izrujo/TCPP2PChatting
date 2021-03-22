@@ -28,7 +28,7 @@
     <ClCompile Include="Chatting\Commands.cpp" />
     <ClCompile Include="Chatting\KeyActionFactory.cpp" />
     <ClCompile Include="Chatting\KeyActions.cpp" />
-    <ClCompile Include="Chatting\ListenSocket.cpp" />
+    <ClCompile Include="Chatting\ServerSocket.cpp" />
     <ClCompile Include="Chatting\Packet.cpp" />
     <ClCompile Include="Chatting\Viewer.cpp" />
     <ClCompile Include="Graphics\GraphVisitors.cpp" />
@@ -78,7 +78,7 @@
     <ClInclude Include="Chatting\Commands.h" />
     <ClInclude Include="Chatting\KeyActionFactory.h" />
     <ClInclude Include="Chatting\KeyActions.h" />
-    <ClInclude Include="Chatting\ListenSocket.h" />
+    <ClInclude Include="Chatting\ServerSocket.h" />
     <ClInclude Include="Chatting\Packet.h" />
     <ClInclude Include="Chatting\resource.h" />
     <ClInclude Include="Chatting\Viewer.h" />
@@ -130,7 +130,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{c726aba5-678d-48ef-ab47-4b38a1a158da}</ProjectGuid>
     <RootNamespace>TCPP2PChatting</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -150,8 +150,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -224,6 +225,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

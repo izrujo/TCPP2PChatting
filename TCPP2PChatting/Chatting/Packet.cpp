@@ -1,6 +1,6 @@
 #include "Packet.h"
 
-Packet::Packet(string identifier = "", string content = "") 
+Packet::Packet(string identifier, string content) 
 	: identifier(identifier), content(content) {
 
 }
