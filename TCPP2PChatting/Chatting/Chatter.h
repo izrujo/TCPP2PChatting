@@ -1,12 +1,12 @@
 #ifndef _CHATTER_H
 #define _CHATTER_H
-
+#include "ServerSocket.h"
 #include <string>
 
 using namespace std;
 
 class ChattingForm;
-class ServerSocket;
+//class ServerSocket;
 
 class Chatter {
 public:
@@ -16,10 +16,11 @@ public:
 	Chatter& operator=(const Chatter& source);
 
 	bool Call(string ipAddress, int portNumber);
+	void Listen();
 
 public:
 	ChattingForm* chattingForm;
-	ServerSocket* serverSocket;
+	ServerSocket serverSocket;
 };
 
 

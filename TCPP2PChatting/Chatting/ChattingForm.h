@@ -5,6 +5,8 @@
 #include <string>
 using namespace std;
 
+typedef signed long int Long;
+
 class TextEditingForm;
 class ChatEditingForm;
 class Chatter;

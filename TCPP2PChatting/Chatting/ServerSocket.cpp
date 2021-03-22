@@ -99,3 +99,17 @@ void ServerSocket::SendDataAll(Packet *packet) {
 		this->clientSockets.GetNext(current);
 	}
 }
+
+void ServerSocket::SendDataAll(TCHAR(*buffer), size_t len) {
+	POSITION position;
+	position = this->clientSockets.GetHeadPosition();
+	ClientSocket* client = NULL;
+
+	while (position != NULL) {
+		client = (ClientSocket*)this->clientSockets.GetNext(position);
+		if (client != NULL) {
+			client->Send(buffer, len * 2); //유니코드를 사용하므로 문자열 길이에 *2
+			//반환값은 *2한 값과 같아야 한다.
+		}
+	}
+}

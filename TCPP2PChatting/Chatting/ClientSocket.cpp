@@ -40,14 +40,15 @@ void ClientSocket::OnReceive(int nErrorCode){
 	ClientSocket *itSocket;
 
 	Packet *packet = new Packet;
+	TCHAR buffer[1024];
 
 	Viewer viewer(this->serverSocket->chatter->chattingForm);
 
 	LONG index;
 
 	GetPeerName(ipAddress, portNumber);
-	if (Receive(packet, sizeof(Packet)) > 0) {
-		this->serverSocket->SendDataAll(packet);
+	if (Receive(buffer, sizeof(buffer)) > 0) {
+		this->serverSocket->SendDataAll(buffer, sizeof(buffer));
 
 		current = this->serverSocket->clientSockets.GetHeadPosition();
 		while (previous != current && current != NULL && onIsFind != TRUE) {

@@ -82,7 +82,8 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 		sendButtonRect.Width(), sendButtonRect.Height(), "Send");
 
 	this->chatter = new Chatter(this);
-	//this->chatter->Call(this->ipAddress, this->portNumber);
+	this->chatter->Listen();
+	this->chatter->Call(this->ipAddress, this->portNumber);
 
 	//юс╫ц
 	Viewer viewer(this);
