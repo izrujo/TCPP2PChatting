@@ -13,8 +13,43 @@ PacketBag::PacketBag(Long capacity)
 	this->length = 0;
 }
 
+PacketBag::PacketBag(const PacketBag& source)
+	: packets(source.packets) {
+	Packet* packet;
+
+	Long i = 0;
+	while (i < source.length) {
+		packet = const_cast<PacketBag&>(source).GetAt(i);
+		this->packets.Modify(i, new Packet(*packet));
+		
+		i++;
+	}
+
+	this->capacity = source.capacity;
+	this->length = source.length;
+}
+
 PacketBag::~PacketBag() {
 
+}
+
+PacketBag& PacketBag::operator =(const PacketBag& source) {
+	this->packets = source.packets;
+
+	Packet* packet;
+
+	Long i = 0;
+	while (i < source.length) {
+		packet = const_cast<PacketBag&>(source).GetAt(i);
+		this->packets.Modify(i, new Packet(*packet));
+
+		i++;
+	}
+
+	this->capacity = source.capacity;
+	this->length = source.length;
+
+	return *this;
 }
 
 Long PacketBag::Add(Packet* packet) {
