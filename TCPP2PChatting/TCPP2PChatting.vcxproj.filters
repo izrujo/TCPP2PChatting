@@ -163,6 +163,7 @@
     <ClCompile Include="Chatting\ServerSocket.cpp">
       <Filter>Chatting</Filter>
     </ClCompile>
+    <ClCompile Include="PacketBag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextEditor\Caret.h">
@@ -318,6 +319,7 @@
     <ClInclude Include="Chatting\ServerSocket.h">
       <Filter>Chatting</Filter>
     </ClInclude>
+    <ClInclude Include="PacketBag.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TextEditor\TextEditingForm.rc">
