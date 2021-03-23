@@ -7,7 +7,9 @@
 class PacketBag {
 public:
 	PacketBag(Long capacity = 32);
+	PacketBag(const PacketBag& source);
 	~PacketBag();
+	PacketBag& operator =(const PacketBag& source);
 	Long Add(Packet* packet);
 	Packet* GetAt(Long index);
 	Long Find(Packet::IDENTIFY identify, Long number);
