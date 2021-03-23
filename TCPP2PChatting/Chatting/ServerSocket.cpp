@@ -9,14 +9,21 @@ ServerSocket::ServerSocket(Chatter *chatter)
 }
 
 ServerSocket::ServerSocket(const ServerSocket& source) 
-	: chatter(source.chatter), packetBag(source.packetBag) {
-
+	: packetBag(source.packetBag) {
+	this->chatter = source.chatter;
 }
 
 ServerSocket::~ServerSocket() {
 	if (this->packetBag != NULL) {
 		delete this->packetBag;
 	}
+}
+
+ServerSocket& ServerSocket::operator=(const ServerSocket& source) {
+	this->chatter = source.chatter;
+	this->packetBag = source.packetBag;
+
+	return *this;
 }
 
 void ServerSocket::OnAccept(int nErrorCode) {
@@ -34,10 +41,11 @@ void ServerSocket::OnAccept(int nErrorCode) {
 		string ipInformation;
 		Long number = this->packetBag->FindIP(ipInformation);
 		//3.3. 못찾았으면
-		if (number == -1) {
+		if (number == 0) {
 			//3.3.1. 패킷을 만들다.
+			number = this->packetBag->GetLastNumber(Packet::ID_IP);
 			CString packetMessage;
-			packetMessage.Format("%d:%s:%d", Packet::ID_IP, ipAddress, portNumber);
+			packetMessage.Format("%d:%d:%s:%d", number + 1, Packet::ID_IP, ipAddress, portNumber);
 			Packet* packet = new Packet((LPCTSTR)packetMessage);
 			//3.3.2. 모두에게 전달하다.
 			this->SendDataAll(packet);

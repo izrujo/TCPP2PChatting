@@ -1,17 +1,25 @@
 #include "Chatter.h"
 #include "ChattingForm.h"
-//#include "ServerSocket.h"
 #include "ClientSocket.h"
+#include "ChatEditingForm.h"
+#include "Viewer.h"
+#include "Packet.h"
+#include "PacketBag.h"
+#include "../TextEditor/Glyph.h"
 
 Chatter::Chatter(ChattingForm* chattingForm)
 	: serverSocket(this) {
 	this->chattingForm = chattingForm;
-	//this->serverSocket = new ServerSocket(this);
+	
+	if (!AfxSocketInit()) //소켓 라이브러리 초기화
+	{
+		AfxMessageBox(_T("ERROR: 소켓 초기화 실패"));
+	}
 }
 
-Chatter::Chatter(const Chatter& source) {
+Chatter::Chatter(const Chatter& source)
+	: serverSocket(source.serverSocket) {
 	this->chattingForm = source.chattingForm;
-	//this->serverSocket = new ServerSocket(this);
 }
 
 Chatter::~Chatter() {
@@ -20,25 +28,29 @@ Chatter::~Chatter() {
 
 Chatter& Chatter::operator=(const Chatter& source) {
 	this->chattingForm = source.chattingForm;
-
-	//if (this->serverSocket != NULL) {
-	//	delete this->serverSocket;
-	//}
-	//this->serverSocket = source.serverSocket;
+	this->serverSocket = source.serverSocket;
 
 	return *this;
 }
 
 bool Chatter::Call(string ipAddress, int portNumber) {
+	//1. 클라이언트 소켓을 생성하다.
 	ClientSocket* clientSocket = new ClientSocket;
 	clientSocket->Create();
+	//2. 클라이언트 소켓을 연결하다.
 	bool isConnected = clientSocket->Connect(ipAddress.c_str(), portNumber);
+	//3. 연결에 성공했으면
 	if (isConnected == true) {
+		//3.1. 서버 소켓의 리스트에 추가하다.
 		this->serverSocket.clientSockets.AddTail(clientSocket);
+		//3.2. 클라이언트 소켓의 서버 소켓을 설정하다.
 		clientSocket->SetServerSocket(&this->serverSocket);
 	}
+	//4. 연결에 실패했으면
 	else {
+		//4.1. 클라이언트 소켓을 닫다.
 		clientSocket->Close();
+		//4.2. 클라이언트 소켓을 없애다.
 		delete clientSocket;
 	}
 
@@ -46,10 +58,6 @@ bool Chatter::Call(string ipAddress, int portNumber) {
 }
 
 void Chatter::Listen() {
-	if (!AfxSocketInit()) //소켓 라이브러리 초기화
-	{
-		
-	}
 	//포트번호 : 포트포워딩 규칙 설정 시에 설정한 내부 포트 번호
 	if (this->serverSocket.Create(2180, SOCK_STREAM)) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
 	{
@@ -63,4 +71,21 @@ void Chatter::Listen() {
 		DWORD error = GetLastError();
 		AfxMessageBox(_T("ERROR: Failed to create server socket!"));
 	}
+}
+
+void Chatter::Speak() {
+	//1. 말할 내용을 가져오다.
+	string speakMessage = this->chattingForm->chattingEdit->note->GetContent();
+	//2. 보여주다.
+	Viewer viewer;
+	viewer.View(speakMessage);
+	//3. 채팅 패킷을 만들다.
+	Long number = this->serverSocket.packetBag->GetLastNumber(Packet::ID_CHAT);
+	CString packetMessage;
+	packetMessage.Format("%d:%d:%s", number + 1, Packet::ID_CHAT, speakMessage);
+	Packet* packet = new Packet((LPCTSTR)packetMessage);
+	//4. 서버 소켓에서 모두에게 데이터를 보내다.
+	this->serverSocket.SendDataAll(packet);
+	//5. 패킷을 가방에 추가하다.
+	this->serverSocket.packetBag->Add(packet);
 }
