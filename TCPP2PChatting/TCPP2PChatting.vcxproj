@@ -34,6 +34,7 @@
     <ClCompile Include="Graphics\GraphVisitors.cpp" />
     <ClCompile Include="Graphics\UIGraphFactory.cpp" />
     <ClCompile Include="Graphics\UIGraphs.cpp" />
+    <ClCompile Include="PacketBag.cpp" />
     <ClCompile Include="TextEditor\Caret.cpp" />
     <ClCompile Include="TextEditor\CaretController.cpp" />
     <ClCompile Include="TextEditor\CharacterMetrics.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Graphics\GraphVisitors.h" />
     <ClInclude Include="Graphics\UIGraphFactory.h" />
     <ClInclude Include="Graphics\UIGraphs.h" />
+    <ClInclude Include="PacketBag.h" />
     <ClInclude Include="TextEditor\Caret.h" />
     <ClInclude Include="TextEditor\CaretController.h" />
     <ClInclude Include="TextEditor\CharacterMetrics.h" />
