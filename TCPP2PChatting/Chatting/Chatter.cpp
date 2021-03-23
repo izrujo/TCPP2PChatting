@@ -59,7 +59,7 @@ bool Chatter::Call(string ipAddress, int portNumber) {
 
 void Chatter::Listen() {
 	//포트번호 : 포트포워딩 규칙 설정 시에 설정한 내부 포트 번호
-	if (this->serverSocket.Create(2180, SOCK_STREAM)) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
+	if (this->serverSocket.Create(80, SOCK_STREAM)) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
 	{
 		if (!this->serverSocket.Listen()) //서버가 클라이언트의 접속을 받을 수 있는 상태로 설정
 		{

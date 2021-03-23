@@ -51,7 +51,7 @@ void Packet::GetPacketMessage(char*(*buffer), Long* length) {
 
 	tempString += ":" + this->content;
 
-	*length = tempString.length();
+	*length = tempString.length()+1;
 	*buffer = new char[*length];
 
 	memset(*buffer, *length, sizeof(char));
