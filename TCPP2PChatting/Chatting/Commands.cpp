@@ -2,6 +2,7 @@
 #include "ChattingForm.h"
 #include "Viewer.h"
 #include "ChatEditingForm.h"
+#include "Chatter.h"
 
 #include "../TextEditor/TextEditingForm.h"
 #include "../TextEditor/Glyph.h"
@@ -48,12 +49,7 @@ SendCommand& SendCommand::operator=(const SendCommand& source) {
 }
 
 void SendCommand::Execute() {
-	string content(": ");
-	content += this->chattingForm->chattingEdit->note->GetContent();
-	content += "\r\n";
-
-	Viewer viewer(this->chattingForm);
-	viewer.View(content);
+	this->chattingForm->chatter->Speak();
 
 	if (this->chattingForm->chattingEdit->note != NULL) {
 		delete this->chattingForm->chattingEdit->note;
