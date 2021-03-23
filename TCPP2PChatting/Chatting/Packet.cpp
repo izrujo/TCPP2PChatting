@@ -1,18 +1,28 @@
 #include "Packet.h"
 
 Packet::Packet(string packetMessage) {
+	Long offset = 0;
 	Long index;
-	index = packetMessage.find(':');
+	index = packetMessage.find(':', offset);
 
 	this->identifier = ID_ERROR;
 	if (index != string::npos) {
-		this->identifier = (IDENTIFY)stoi(packetMessage.substr(0, index));
-		this->content = packetMessage.substr(index + 1, packetMessage.length() - index -1);
+		this->number = stoi(packetMessage.substr(0, index));
+
+		offset = index + 1;
+		index = packetMessage.find(':', offset);
+		if (index != string::npos) {
+			this->identifier = (IDENTIFY)stoi(packetMessage.substr(offset, index - offset));
+
+			offset = index + 1;
+			this->content = packetMessage.substr(offset, packetMessage.length() - offset);
+		}
 	}
 }
 
-Packet::Packet(IDENTIFY identifier, string content)
+Packet::Packet(Long number, IDENTIFY identifier, string content)
 	: content(content) {
+	this->number = number;
 	this->identifier = identifier;
 }
 
@@ -45,4 +55,17 @@ void Packet::GetPacketMessage(char*(*buffer), Long* length) {
 	memset(*buffer, *length, sizeof(char));
 
 	strcpy(*buffer, tempString.c_str());
+}
+
+void Packet::GetIPInformations(string* ipAddress, Long* portNumber) {
+	Long offset = 0;
+	Long index;
+	
+	index = this->content.find(':', offset);
+	if (index != string::npos) {
+		*ipAddress = this->content.substr(offset, index);
+
+		offset = index + 1;
+		*portNumber = stoi(this->content.substr(offset, this->content.length() - offset));
+	}
 }
