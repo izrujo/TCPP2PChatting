@@ -166,6 +166,9 @@
     <ClCompile Include="Chatting\PacketBag.cpp">
       <Filter>Chatting</Filter>
     </ClCompile>
+    <ClCompile Include="TextEditor\GlyphMaker.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextEditor\Caret.h">
@@ -323,6 +326,9 @@
     </ClInclude>
     <ClInclude Include="Chatting\PacketBag.h">
       <Filter>Chatting</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\GlyphMaker.h">
+      <Filter>TextEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

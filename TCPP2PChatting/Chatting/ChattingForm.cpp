@@ -8,9 +8,13 @@
 #include "resource.h"
 
 #include "../TextEditor/TextEditingForm.h"
+#include "../TextEditor/GlyphMaker.h"
+#include "../TextEditor/Glyph.h"
 
 #include "../Graphics/UIGraphFactory.h"
 #include "../Graphics/GraphVisitors.h"
+
+#pragma warning(disable:4996)
 
 #define MARGIN 10
 
@@ -83,17 +87,7 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	this->chatter = new Chatter(this);
 	this->chatter->Listen();
-	this->chatter->Call(this->ipAddress, this->portNumber);
-
-	//채팅 에딧 창에 자신이 접속하였다는 문구를 작성하다.
-	
-	//GlyphMaker glyphMaker;
-	//Glyph* comment = glyphMaker.Make("[%s:%d]님이 채팅방에 접속했습니다.\r\n\r\n", ipAddress, portNumber);
-	//채팅을 보내다.
-	this->SendMessage(WM_COMMAND, MAKEWPARAM(IDC_SEND_MESSAGE, 0));
-	//임시
-	Viewer viewer(this);
-	viewer.View("채팅방에 접속하였습니다.\r\n\r\n");
+	//this->chatter->Call(this->ipAddress, this->portNumber);
 
 	return 0;
 }

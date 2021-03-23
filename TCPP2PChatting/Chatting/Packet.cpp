@@ -1,5 +1,7 @@
 #include "Packet.h"
 
+#pragma warning(disable:4996)
+
 Packet::Packet(string packetMessage) {
 	Long offset = 0;
 	Long index;

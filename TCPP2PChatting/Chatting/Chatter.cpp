@@ -77,7 +77,7 @@ void Chatter::Speak() {
 	//1. 말할 내용을 가져오다.
 	string speakMessage = this->chattingForm->chattingEdit->note->GetContent();
 	//2. 보여주다.
-	Viewer viewer;
+	Viewer viewer(this->chattingForm);
 	viewer.View(speakMessage);
 	//3. 채팅 패킷을 만들다.
 	Long number = this->serverSocket.packetBag->GetLastNumber(Packet::ID_CHAT);

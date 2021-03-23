@@ -4,6 +4,7 @@
 #include "Chatter.h"
 #include "ChattingForm.h"
 #include "Viewer.h"
+#include "PacketBag.h"
 
 #pragma warning(disable:4996)
 
@@ -57,7 +58,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 			if (identifier == Packet::ID_IP) {
 				//content를 ip주소와 포트번호로 나누기
 				string ipAddress;
-				int portNumber;
+				Long portNumber;
 				packet->GetIPInformations(&ipAddress, &portNumber);
 				//CString strTemp = content.c_str();
 				//Long punctutation = strTemp.Find(':');

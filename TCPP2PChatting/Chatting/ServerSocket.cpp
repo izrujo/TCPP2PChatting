@@ -2,15 +2,17 @@
 #include "ClientSocket.h"
 #include "Packet.h"
 #include "PacketBag.h"
+#include "Viewer.h"
+#include "Chatter.h"
 
-ServerSocket::ServerSocket(Chatter *chatter) 
-	: packetBag() {
+ServerSocket::ServerSocket(Chatter *chatter) {
 	this->chatter = chatter;
+	this->packetBag = new PacketBag;
 }
 
-ServerSocket::ServerSocket(const ServerSocket& source) 
-	: packetBag(source.packetBag) {
+ServerSocket::ServerSocket(const ServerSocket& source) {
 	this->chatter = source.chatter;
+	this->packetBag = new PacketBag(*source.packetBag);
 }
 
 ServerSocket::~ServerSocket() {
@@ -21,7 +23,10 @@ ServerSocket::~ServerSocket() {
 
 ServerSocket& ServerSocket::operator=(const ServerSocket& source) {
 	this->chatter = source.chatter;
-	this->packetBag = source.packetBag;
+	if (this->packetBag != 0) {
+		delete this->packetBag;
+	}
+	this->packetBag = new PacketBag(*source.packetBag);
 
 	return *this;
 }
@@ -53,6 +58,11 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			this->clientSockets.AddTail(newClient);
 			//3.3.4. 클라이언트 소켓의 서버 소켓을 설정하다.
 			newClient->SetServerSocket(this);
+
+			CString comment;
+			comment.Format("[%s]에서 채팅방에 접속하였습니다.\r\n\r\n", ipAddress);
+			Viewer viewer(this->chatter->chattingForm);
+			viewer.View((LPCTSTR)comment);
 
 			AfxMessageBox(_T("Other Peer Connected!!"));
 		}

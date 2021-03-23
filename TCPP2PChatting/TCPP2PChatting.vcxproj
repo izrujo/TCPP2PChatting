@@ -51,6 +51,7 @@
     <ClCompile Include="TextEditor\Font.cpp" />
     <ClCompile Include="TextEditor\Glyph.cpp" />
     <ClCompile Include="TextEditor\GlyphFactory.cpp" />
+    <ClCompile Include="TextEditor\GlyphMaker.cpp" />
     <ClCompile Include="TextEditor\HistoryBook.cpp" />
     <ClCompile Include="TextEditor\HScrollActionFactory.cpp" />
     <ClCompile Include="TextEditor\HScrollActions.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="TextEditor\Font.h" />
     <ClInclude Include="TextEditor\Glyph.h" />
     <ClInclude Include="TextEditor\GlyphFactory.h" />
+    <ClInclude Include="TextEditor\GlyphMaker.h" />
     <ClInclude Include="TextEditor\HistoryBook.h" />
     <ClInclude Include="TextEditor\HScrollActionFactory.h" />
     <ClInclude Include="TextEditor\HScrollActions.h" />
