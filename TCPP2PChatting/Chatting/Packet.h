@@ -12,19 +12,26 @@ public:
 
 public:
 	Packet(string PacketMessage = "");
-	Packet(IDENTIFY identifier, string content);
+	Packet(Long number, IDENTIFY identifier, string content);
 	Packet(const Packet& source);
 	~Packet();
 	Packet& operator=(const Packet& source);
 
 	void GetPacketMessage(char*(*buffer), Long* length);
+	void GetIPInformations(string* ipAddress, Long* portNumber);
+	Long GetNumber() const;
 	IDENTIFY GetIdentifier() const;
 	string& GetContent() const;
 
 private:
+	Long number;
 	IDENTIFY identifier;
 	string content;
 };
+
+inline Long Packet::GetNumber() const {
+	return this->number;
+}
 
 inline Packet::IDENTIFY Packet::GetIdentifier() const {
 	return this->identifier;
