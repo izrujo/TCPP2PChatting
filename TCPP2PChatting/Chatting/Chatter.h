@@ -1,5 +1,6 @@
 #ifndef _CHATTER_H
 #define _CHATTER_H
+
 #include "ServerSocket.h"
 #include <string>
 
@@ -17,6 +18,7 @@ public:
 
 	bool Call(string ipAddress, int portNumber);
 	void Listen();
+	void Speak();
 
 public:
 	ChattingForm* chattingForm;

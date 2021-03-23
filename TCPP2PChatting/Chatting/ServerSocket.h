@@ -1,25 +1,28 @@
 #ifndef _SERVERSOCKET_H
 #define _SERVERSOCKET_H
+
 #include <afxsock.h>
 
 class Chatter;
+class PacketBag;
 class ClientSocket;
 class Packet;
-class ServerSocket : public CAsyncSocket { //입출력이 비동기적으로 이루어지는 소켓
-public:
-	Chatter *chatter;
-	CPtrList clientSockets;
 
+class ServerSocket : public CAsyncSocket {
 public:
 	ServerSocket(Chatter *chatter = 0);
+	ServerSocket(const ServerSocket& source);
 	virtual ~ServerSocket();
+	ServerSocket& operator=(const ServerSocket& source);
 
-	//OnAccept - 서버가 접속을 기다리는 특정 포트로 클라이언트의 TCP 접속이 있을 때 자동으로 호출된다.
 	virtual void OnAccept(int nErrorCode);
-
-	void SendDataAll(Packet *packet);
-	
 	void CloseClientSocket(ClientSocket *clientSocket);
+	void SendDataAll(Packet *packet);
+
+public:
+	CPtrList clientSockets;
+	Chatter* chatter;
+	PacketBag* packetBag;
 };
 
 #endif //_SERVERSOCKET_H
