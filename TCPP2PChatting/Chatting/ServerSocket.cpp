@@ -50,7 +50,7 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			//3.3.1. 패킷을 만들다.
 			number = this->packetBag->GetLastNumber(Packet::ID_IP);
 			CString packetMessage;
-			packetMessage.Format("%d:%d:%s:%d", number + 1, Packet::ID_IP, ipAddress, portNumber);
+			packetMessage.Format("%d:%d:%s:%d", number + 1, Packet::ID_IP, (LPCTSTR)ipAddress, portNumber);
 			Packet* packet = new Packet((LPCTSTR)packetMessage);
 			//3.3.2. 모두에게 전달하다.
 			this->SendDataAll(packet);
