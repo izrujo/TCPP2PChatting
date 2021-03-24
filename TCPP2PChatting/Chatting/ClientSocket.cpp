@@ -47,6 +47,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 
 	string ipAddress;
 	Long portNumber;
+	Long number;
 
 	TCHAR buffer[1024];
 	//1. 패킷을 받다.
@@ -59,8 +60,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 		Long index = serverSocket->packetBag->Find(identifier, number);
 		//3. 못찾았으면
 		if (index == -1) {
-			//3.1. 모두에게 전달하다.
-			serverSocket->SendDataAll(packet);
+			
 			//3.2. ip정보이면 대화자에서 연락하다.
 			if (identifier == Packet::ID_IP) {
 				//content를 ip주소와 포트번호로 나누기
@@ -77,18 +77,25 @@ void ClientSocket::OnReceive(int nErrorCode) {
 			else if (identifier == Packet::ID_CHAT_REQUEST || identifier == Packet::ID_CHAT_RESPONSE) {
 				// 3.3.1. 의뢰한 채팅이면 소켓 주소를 추가한다.
 				if (identifier == Packet::ID_CHAT_REQUEST) {
+					number = this->serverSocket->packetBag->GetLastNumber(Packet::ID_CHAT_RESPONSE);
+
 					this->GetPeerName(socketAddress, socketPortNumber);
 
 					socketAddress.Format("%s:%d : %s", (LPCTSTR)socketAddress, socketPortNumber, content.c_str());
-
 					content = (LPCTSTR)socketAddress;
+
+					if (packet != 0) {
+						delete packet;
+					}
+					packet = new Packet(number, Packet::ID_CHAT_RESPONSE, content);
 				}
 				// 3.3.2. 채팅 내용을 보여주다.
 				Viewer viewer(serverSocket->chatter->chattingForm);
 				content+= "\r\n";
 				viewer.View(content);
-				
 			}
+			//3.1. 모두에게 전달하다.
+			serverSocket->SendDataAll(packet);
 			//3.4. 패킷 가방에 패킷을 추가하다.
 			serverSocket->packetBag->Add(packet);
 		}
