@@ -47,7 +47,9 @@ Packet& Packet::operator=(const Packet& source) {
 void Packet::GetPacketMessage(char*(*buffer), Long* length) {
 	string tempString;
 
-	tempString = to_string(this->identifier);
+	tempString = to_string(this->number);
+
+	tempString += ":" + to_string(this->identifier);
 
 	tempString += ":" + this->content;
 

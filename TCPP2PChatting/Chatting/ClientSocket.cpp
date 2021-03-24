@@ -51,7 +51,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 		//2. 패킷 가방에서 찾다.
 		Long index = serverSocket->packetBag->Find(identifier, number);
 		//3. 못찾았으면
-		if (index != -1) {
+		if (index == -1) {
 			//3.1. 모두에게 전달하다.
 			serverSocket->SendDataAll(packet);
 			//3.2. ip정보이면 대화자에서 연락하다.
@@ -70,7 +70,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 			}
 			//3.3. 채팅이면 패킷 내용을 보여주다.
 			else if (identifier == Packet::ID_CHAT) {
-				Viewer viewer;
+				Viewer viewer(serverSocket->chatter->chattingForm);
 				viewer.View(content);
 			}
 			//3.4. 패킷 가방에 패킷을 추가하다.
