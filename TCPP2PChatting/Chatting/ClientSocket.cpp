@@ -60,7 +60,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 		Long index = serverSocket->packetBag->Find(identifier, number);
 		//3. 못찾았으면
 		if (index == -1) {
-			
+
 			//3.2. ip정보이면 대화자에서 연락하다.
 			if (identifier == Packet::ID_IP) {
 				//content를 ip주소와 포트번호로 나누기
@@ -87,11 +87,11 @@ void ClientSocket::OnReceive(int nErrorCode) {
 					if (packet != 0) {
 						delete packet;
 					}
-					packet = new Packet(number+1, Packet::ID_CHAT_RESPONSE, content);
+					packet = new Packet(number + 1, Packet::ID_CHAT_RESPONSE, content);
 				}
 				// 3.3.2. 채팅 내용을 보여주다.
 				Viewer viewer(serverSocket->chatter->chattingForm);
-				content+= "\r\n";
+				content += "\r\n";
 				viewer.View(content);
 			}
 			//3.1. 모두에게 전달하다.

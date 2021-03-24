@@ -58,11 +58,18 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			this->clientSockets.AddTail(newClient);
 			//3.3.4. 클라이언트 소켓의 서버 소켓을 설정하다.
 			newClient->SetServerSocket(this);
+			if (packet != 0) {
+				delete packet;
+			}
 
 			CString comment;
-			comment.Format("[%s]에서 채팅방에 접속하였습니다.\r\n\r\n", ipAddress);
-			Viewer viewer(this->chatter->chattingForm);
-			viewer.View((LPCTSTR)comment);
+			comment.Format("\r\n\r\n[%s]에서 채팅방에 접속하였습니다.\r\n\r\n", ipAddress);
+			number = this->packetBag->GetLastNumber(Packet::ID_CHAT_RESPONSE);
+			packet = new Packet(number + 1, Packet::ID_CHAT_RESPONSE, (LPCTSTR)comment);
+			this->SendDataAll(packet);
+			if (packet != 0) {
+				delete packet;
+			}
 
 			AfxMessageBox(_T("Other Peer Connected!!"));
 		}
