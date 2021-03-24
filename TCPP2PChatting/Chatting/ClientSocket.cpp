@@ -71,6 +71,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 			//3.3. 채팅이면 패킷 내용을 보여주다.
 			else if (identifier == Packet::ID_CHAT) {
 				Viewer viewer(serverSocket->chatter->chattingForm);
+				content+= "\r\n";
 				viewer.View(content);
 			}
 			//3.4. 패킷 가방에 패킷을 추가하다.

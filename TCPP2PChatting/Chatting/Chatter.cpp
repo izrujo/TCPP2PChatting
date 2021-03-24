@@ -79,6 +79,7 @@ void Chatter::Speak() {
 	//2. 보여주다.
 	Viewer viewer(this->chattingForm);
 	viewer.View(speakMessage);
+	viewer.View("\r\n");
 	//3. 채팅 패킷을 만들다.
 	Long number = this->serverSocket.packetBag->GetLastNumber(Packet::ID_CHAT);
 	CString packetMessage;
