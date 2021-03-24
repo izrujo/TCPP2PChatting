@@ -87,7 +87,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 					if (packet != 0) {
 						delete packet;
 					}
-					packet = new Packet(number, Packet::ID_CHAT_RESPONSE, content);
+					packet = new Packet(number+1, Packet::ID_CHAT_RESPONSE, content);
 				}
 				// 3.3.2. 채팅 내용을 보여주다.
 				Viewer viewer(serverSocket->chatter->chattingForm);

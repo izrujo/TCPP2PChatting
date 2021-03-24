@@ -87,7 +87,7 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	this->chatter = new Chatter(this);
 	this->chatter->Listen();
-	this->chatter->Call(this->ipAddress, this->portNumber);
+	//this->chatter->Call(this->ipAddress, this->portNumber);
 
 	return 0;
 }

@@ -131,7 +131,7 @@ Long PacketBag::GetLastNumber(Packet::IDENTIFY identify) {
 		if (identify == otherIdentify) {
 			number = packet->GetNumber();
 		}
-		i++;
+		i--;
 	}
 
 	return number;
