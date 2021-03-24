@@ -140,16 +140,16 @@ Long PacketBag::GetLastNumber(Packet::IDENTIFY identify) {
 int CompareIdentifies(void* one, void* other) {
 	Long ret;
 
-	Packet* one_ = (Packet*)one;
+	Packet** one_ = (Packet**)one;
 	Packet::IDENTIFY* other_ = (Packet::IDENTIFY*)other;
 
-	if (one_->GetIdentifier() < *other_) {
+	if ((*one_)->GetIdentifier() < *other_) {
 		ret = -1;
 	}
-	else if (one_->GetIdentifier() == *other_) {
+	else if ((*one_)->GetIdentifier() == *other_) {
 		ret = 0;
 	}
-	else if (one_->GetIdentifier() > *other_) {
+	else if ((*one_)->GetIdentifier() > *other_) {
 		ret = 1;
 	}
 
@@ -157,8 +157,8 @@ int CompareIdentifies(void* one, void* other) {
 }
 
 int CompareIpInformations(void* one, void* other) {
-	Packet* one_ = (Packet*)one;
+	Packet** one_ = (Packet**)one;
 	string* other_ = (string*)other;
 
-	return one_->GetContent().compare(other_->c_str());
+	return (*one_)->GetContent().compare(other_->c_str());
 }
