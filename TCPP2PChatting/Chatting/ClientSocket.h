@@ -19,7 +19,7 @@ public:
 	void SendData(Packet* packet);
 
 public:
-	CAsyncSocket* serverSocket;
+	ServerSocket* serverSocket;
 };
 
 #endif //_CLIENTSOCKET_H
