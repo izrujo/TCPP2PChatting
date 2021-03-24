@@ -81,12 +81,15 @@ void Chatter::Speak() {
 	viewer.View(speakMessage);
 	viewer.View("\r\n");
 	//3. 채팅 패킷을 만들다.
-	Long number = this->serverSocket.packetBag->GetLastNumber(Packet::ID_CHAT);
 	CString packetMessage;
-	packetMessage.Format("%d:%d:%s", number + 1, Packet::ID_CHAT, speakMessage.c_str());
+	packetMessage.Format("%d:%d:%s", 0, Packet::ID_CHAT_REQUEST, speakMessage.c_str());
 	Packet* packet = new Packet((LPCTSTR)packetMessage);
 	//4. 서버 소켓에서 모두에게 데이터를 보내다.
 	this->serverSocket.SendDataAll(packet);
 	//5. 패킷을 가방에 추가하다.
-	this->serverSocket.packetBag->Add(packet);
+	//this->serverSocket.packetBag->Add(packet);
+
+	if (packet != 0) {
+		delete packet;
+	}
 }
