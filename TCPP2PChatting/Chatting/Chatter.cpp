@@ -76,18 +76,12 @@ void Chatter::Listen() {
 void Chatter::Speak() {
 	//1. 말할 내용을 가져오다.
 	string speakMessage = this->chattingForm->chattingEdit->note->GetContent();
-	//2. 보여주다.
-	//Viewer viewer(this->chattingForm);
-	//viewer.View(speakMessage);
-	//viewer.View("\r\n");
-	//3. 채팅 패킷을 만들다.
+	//2. 채팅 패킷을 만들다.
 	CString packetMessage;
 	packetMessage.Format("%d:%d:%s", 0, Packet::ID_CHAT_REQUEST, speakMessage.c_str());
 	Packet* packet = new Packet((LPCTSTR)packetMessage);
-	//4. 서버 소켓에서 모두에게 데이터를 보내다.
+	//3. 서버 소켓에서 모두에게 데이터를 보내다.
 	this->serverSocket.SendDataAll(packet);
-	//5. 패킷을 가방에 추가하다.
-	//this->serverSocket.packetBag->Add(packet);
 
 	if (packet != 0) {
 		delete packet;

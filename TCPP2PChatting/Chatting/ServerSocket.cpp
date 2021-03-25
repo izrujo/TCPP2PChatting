@@ -61,11 +61,12 @@ void ServerSocket::OnAccept(int nErrorCode) {
 			if (packet != 0) {
 				delete packet;
 			}
-
+			//3.3.5. 누군가 채팅방에 접속하였음을 알리는 채팅 패킷을 만들다.
 			CString comment;
 			comment.Format("\r\n\r\n[%s]에서 채팅방에 접속하였습니다.\r\n\r\n", ipAddress);
 			number = this->packetBag->GetLastNumber(Packet::ID_CHAT_RESPONSE);
 			packet = new Packet(number + 1, Packet::ID_CHAT_RESPONSE, (LPCTSTR)comment);
+			//3.3.6.모두에게 전달하다.
 			this->SendDataAll(packet);
 			if (packet != 0) {
 				delete packet;
