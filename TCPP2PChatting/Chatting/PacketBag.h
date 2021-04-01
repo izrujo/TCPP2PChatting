@@ -11,6 +11,7 @@ public:
 	~PacketBag();
 	PacketBag& operator =(const PacketBag& source);
 	Long Add(Packet* packet);
+	Long Remove(Long index);
 	Packet* GetAt(Long index);
 	Long Find(Packet::IDENTIFY identify, Long number);
 	Long FindIP(string ipInformation);

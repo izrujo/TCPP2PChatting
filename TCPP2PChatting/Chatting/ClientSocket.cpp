@@ -54,16 +54,35 @@ void ClientSocket::OnReceive(int nErrorCode) {
 	if (this->Receive(buffer, sizeof(buffer)) > 0) {
 		Packet* packet = new Packet(buffer);
 		Packet::IDENTIFY identifier = packet->GetIdentifier();
-		Long number = packet->GetNumber();
+		number = packet->GetNumber();
 		string content = packet->GetContent();
 		//2. 패킷 가방에서 찾다.
 		Long index = serverSocket->packetBag->Find(identifier, number);
 		//3. 못찾았으면
 		if (index == -1) {
-			//3.1. ip정보이면 대화자에서 연락하다.
-			if (identifier == Packet::ID_IP) {
+			//3.1. ip정보이면
+			if (identifier == Packet::ID_SYC) {
+				// 3.1.1. 패킷에서 IP 정보와 port 정보를 읽는다.
 				packet->GetIPInformations(&ipAddress, &portNumber);
-				serverSocket->chatter->Call(ipAddress, portNumber);
+				
+				// 3.1.2. 클라이언트 소켓을 만든다.
+				this->serverSocket->chatter->Call(ipAddress, portNumber);
+			}
+			// 3.2. 클라이언트 정보 동기화 성공 메시지이면
+			else if (identifier == Packet::ID_SYCACK) {
+				//3.2.1. 누군가 채팅방에 접속하였음을 알리는 채팅 패킷을 만들다.
+				packet->GetIPInformations(&ipAddress, &portNumber);
+
+				CString comment;
+				comment.Format("\r\n\r\n[%s]에서 채팅방에 접속하였습니다.\r\n\r\n", ipAddress.c_str());
+				number = this->serverSocket->packetBag->GetLastNumber(Packet::ID_CHAT_RESPONSE);
+				Packet* responsePacket;
+				responsePacket = new Packet(number + 1, Packet::ID_CHAT_RESPONSE, (LPCTSTR)comment);
+				//3.2.2.모두에게 전달하다.
+				this->serverSocket->SendDataAll(responsePacket);
+				if (responsePacket != 0) {
+					delete responsePacket;
+				}
 			}
 			//3.2. 채팅이면
 			else if (identifier == Packet::ID_CHAT_REQUEST || identifier == Packet::ID_CHAT_RESPONSE) {

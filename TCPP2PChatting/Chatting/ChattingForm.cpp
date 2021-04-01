@@ -35,7 +35,7 @@ ChattingForm::ChattingForm() {
 	this->chatter = NULL;
 	this->sendButton = NULL;
 	
-	this->ipAddress = "14.32.96.30";
+	this->ipAddress = "121.138.194.9";//"14.32.96.30";
 	this->portNumber = 2180;
 }
 
@@ -86,7 +86,9 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 		sendButtonRect.Width(), sendButtonRect.Height(), "Send");
 
 	this->chatter = new Chatter(this);
+
 	this->chatter->Listen();
+	//this->chatter->serverSocket.Connect(internalIP, this->portNumber);
 	//this->chatter->Call(this->ipAddress, this->portNumber);
 
 	return 0;

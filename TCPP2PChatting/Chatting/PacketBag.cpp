@@ -67,6 +67,16 @@ Long PacketBag::Add(Packet* packet) {
 	return index;
 }
 
+Long PacketBag::Remove(Long index) {
+	Packet* packet = this->packets.GetAt(index);
+	if (packet != 0) {
+		delete packet;
+	}
+	this->packets.Delete(index);
+
+	return -1;
+}
+
 Packet* PacketBag::GetAt(Long index) {
 	return this->packets.GetAt(index);
 }

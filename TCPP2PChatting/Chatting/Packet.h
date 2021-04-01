@@ -8,7 +8,7 @@ typedef signed long int Long;
 
 class Packet {
 public:
-	enum IDENTIFY { ID_ERROR = 0, ID_IP = 1, ID_CHAT_REQUEST = 2, ID_CHAT_RESPONSE = 3 };
+	enum IDENTIFY { ID_ERROR = 0, ID_SYC = 1, ID_SYCACK = 2, ID_FINISH = 3, ID_CHAT_REQUEST = 4, ID_CHAT_RESPONSE = 5 };
 
 public:
 	Packet(string PacketMessage = "");

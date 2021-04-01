@@ -36,7 +36,7 @@ Chatter& Chatter::operator=(const Chatter& source) {
 bool Chatter::Call(string ipAddress, int portNumber) {
 	//1. 클라이언트 소켓을 생성하다.
 	ClientSocket* clientSocket = new ClientSocket;
-	clientSocket->Create();
+	clientSocket->Create(portNumber, SOCK_STREAM, ipAddress.c_str());
 	//2. 클라이언트 소켓을 연결하다.
 	bool isConnected = clientSocket->Connect(ipAddress.c_str(), portNumber);
 	//3. 연결에 성공했으면
@@ -59,7 +59,10 @@ bool Chatter::Call(string ipAddress, int portNumber) {
 
 void Chatter::Listen() {
 	//포트번호 : 포트포워딩 규칙 설정 시에 설정한 내부 포트 번호
-	if (this->serverSocket.Create(80, SOCK_STREAM)) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
+	CString internalIP = this->serverSocket.GetInternalIpAddress();
+	BOOL onIsSucceed = this->serverSocket.Create(2180, SOCK_STREAM, FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE,
+		(LPCTSTR)internalIP);
+	if (onIsSucceed == TRUE) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
 	{
 		if (!this->serverSocket.Listen()) //서버가 클라이언트의 접속을 받을 수 있는 상태로 설정
 		{

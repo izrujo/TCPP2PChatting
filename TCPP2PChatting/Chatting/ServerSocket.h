@@ -19,6 +19,10 @@ public:
 	void CloseClientSocket(ClientSocket *clientSocket);
 	void SendDataAll(Packet *packet);
 
+	CString GetInternalIpAddress();
+	CString GetExternalIpAddress();// »ç¿ë X
+	CString GetDNSServerIpAddress();
+
 public:
 	CPtrList clientSockets;
 	Chatter* chatter;
