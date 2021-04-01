@@ -34,7 +34,7 @@ ChattingForm::ChattingForm() {
 	this->chattingEdit = NULL;
 	this->chatter = NULL;
 	this->sendButton = NULL;
-	
+
 	this->ipAddress = "121.138.194.9";//"14.32.96.30";
 	this->portNumber = 2180;
 }

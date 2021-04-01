@@ -10,7 +10,7 @@
 Chatter::Chatter(ChattingForm* chattingForm)
 	: serverSocket(this) {
 	this->chattingForm = chattingForm;
-	
+
 	if (!AfxSocketInit()) //소켓 라이브러리 초기화
 	{
 		AfxMessageBox(_T("ERROR: 소켓 초기화 실패"));
