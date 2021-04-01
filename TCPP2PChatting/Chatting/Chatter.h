@@ -23,6 +23,8 @@ public:
 public:
 	ChattingForm* chattingForm;
 	ServerSocket serverSocket;
+
+	BOOL onIsFinished;
 };
 
 

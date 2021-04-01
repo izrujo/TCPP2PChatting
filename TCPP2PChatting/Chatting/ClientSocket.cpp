@@ -35,8 +35,7 @@ void ClientSocket::OnClose(int nErrorCode) {
 	//1. 소켓을 닫다.
 	CSocket::OnClose(nErrorCode);
 	//2. 서버소켓에서 닫다.
-	ServerSocket* serverSocket = (ServerSocket*)this->serverSocket;
-	serverSocket->CloseClientSocket(this);
+	this->serverSocket->CloseClientSocket(this);
 }
 
 void ClientSocket::OnReceive(int nErrorCode) {
@@ -44,6 +43,9 @@ void ClientSocket::OnReceive(int nErrorCode) {
 
 	CString socketAddress;
 	UINT socketPortNumber;
+
+	CString otherIPAddress;
+	UINT otherPortNumber;
 
 	string ipAddress;
 	Long portNumber;
@@ -60,6 +62,12 @@ void ClientSocket::OnReceive(int nErrorCode) {
 		Long index = serverSocket->packetBag->Find(identifier, number);
 		//3. 못찾았으면
 		if (index == -1) {
+			if (identifier == Packet::ID_SYCMY) {
+				// 자신의 ip 정보를 설정한다.
+				packet->GetIPInformations(&ipAddress, &portNumber);
+				this->serverSocket->ipAddress = ipAddress.c_str();
+				this->serverSocket->portNumber = portNumber;
+			}
 			//3.1. ip정보이면
 			if (identifier == Packet::ID_SYC) {
 				// 3.1.1. 패킷에서 IP 정보와 port 정보를 읽는다.
@@ -84,9 +92,49 @@ void ClientSocket::OnReceive(int nErrorCode) {
 					delete responsePacket;
 				}
 			}
-			//3.2. 채팅이면
+			// 3.3. 종료 메시지이면
+			else if (identifier == Packet::ID_FINISH) {
+				// 3.3.1. 종료를 요청한 클라이언트를 찾는다.
+				packet->GetIPInformations(&ipAddress, &portNumber);
+
+				BOOL onIsFind = FALSE;
+				ClientSocket* client = NULL;
+				POSITION previous = NULL;
+				POSITION current = this->serverSocket->clientSockets.GetHeadPosition();
+				while (previous != current && current != NULL && onIsFind != TRUE) {
+					client = (ClientSocket*)this->serverSocket->clientSockets.GetAt(current);
+					
+					client->GetPeerName(otherIPAddress, otherPortNumber);
+					if (ipAddress.compare((LPCTSTR)otherIPAddress) == 0 && portNumber == otherPortNumber) {
+						onIsFind = TRUE;
+					}
+
+					previous = current;
+					this->serverSocket->clientSockets.GetNext(current);
+				}
+
+				// 3.3.2. 종료 허가 패킷을 만든다.
+				Packet* finishPacket = new Packet(0, Packet::ID_FINISHACK, "");
+
+				if (onIsFind == TRUE) {
+					client->SendData(finishPacket);
+				}
+
+				if (finishPacket != 0) {
+					delete finishPacket;
+				}
+			}
+			// 3.4. 종료 허가 메시지이면
+			else if (identifier == Packet::ID_FINISHACK) {
+				// 3.4.1. 종료한다.
+				this->serverSocket->chatter->onIsFinished = TRUE;
+
+				this->serverSocket->chatter->chattingForm->PostMessage(WM_CLOSE);
+				this->serverSocket->CloseClientSocket(this);
+			}
+			//3.5. 채팅이면
 			else if (identifier == Packet::ID_CHAT_REQUEST || identifier == Packet::ID_CHAT_RESPONSE) {
-				//3.2.1. 의뢰한 채팅이면 소켓 주소를 추가하다.
+				//3.5.1. 의뢰한 채팅이면 소켓 주소를 추가하다.
 				if (identifier == Packet::ID_CHAT_REQUEST) {
 					number = this->serverSocket->packetBag->GetLastNumber(Packet::ID_CHAT_RESPONSE);
 					this->GetPeerName(socketAddress, socketPortNumber);
@@ -97,15 +145,18 @@ void ClientSocket::OnReceive(int nErrorCode) {
 					}
 					packet = new Packet(number + 1, Packet::ID_CHAT_RESPONSE, content);
 				}
-				//3.2.2. 채팅 내용을 보여주다.
+				//3.5.2. 채팅 내용을 보여주다.
 				Viewer viewer(serverSocket->chatter->chattingForm);
 				content += "\r\n";
 				viewer.View(content);
 			}
-			//3.3. 모두에게 전달하다.
-			serverSocket->SendDataAll(packet);
-			//3.4. 패킷 가방에 패킷을 추가하다.
-			serverSocket->packetBag->Add(packet);
+			//3.6. 종료 패킷이 아니면
+			if (identifier != Packet::ID_FINISH && identifier != Packet::ID_FINISHACK) {
+				// 3.6.1. 모두에게 전달하다.
+				serverSocket->SendDataAll(packet);
+				//3.6.2. 패킷 가방에 패킷을 추가하다.
+				serverSocket->packetBag->Add(packet);
+			}
 		}
 	}
 

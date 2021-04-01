@@ -4,6 +4,9 @@
 #include "Commands.h"
 #include "ChatEditingForm.h"
 #include "Chatter.h"
+#include "ServerSocket.h"
+#include "ClientSocket.h"
+#include "Packet.h"
 
 #include "resource.h"
 
@@ -88,26 +91,46 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->chatter = new Chatter(this);
 
 	this->chatter->Listen();
-	//this->chatter->serverSocket.Connect(internalIP, this->portNumber);
-	//this->chatter->Call(this->ipAddress, this->portNumber);
+
+	//ClientSocket tempClient;
+	//tempClient.Create(this->portNumber, SOCK_STREAM, this->ipAddress.c_str());
+	//tempClient.Connect(this->ipAddress.c_str(), this->portNumber);
 
 	return 0;
 }
 
 void ChattingForm::OnClose() {
-	if (this->chattingView != NULL) {
-		delete this->chattingView;
-		this->chattingView = NULL;
-	}
-	if (this->chattingEdit != NULL) {
-		delete this->chattingEdit;
-		this->chattingEdit = NULL;
-	}
-	if (this->chatter != NULL) {
-		delete this->chatter;
-	}
+	// 1. 종료 버튼을 클릭했을 때
+	// 2. 종료가 허가되면 종료한다.
+	if (this->chatter->onIsFinished == TRUE) {
+		if (this->chattingView != NULL) {
+			delete this->chattingView;
+			this->chattingView = NULL;
+		}
+		if (this->chattingEdit != NULL) {
+			delete this->chattingEdit;
+			this->chattingEdit = NULL;
+		}
+		if (this->chatter != NULL) {
+			delete this->chatter;
+		}
 
-	CFrameWnd::OnClose();
+		CFrameWnd::OnClose();
+	}
+	// 3. 종료가 허가되지 않으면
+	else {
+		// 3.1. 종료 패킷을 만든다.
+		CString socketAddress;
+		socketAddress.Format("%s:%d", (LPCTSTR)this->chatter->serverSocket.ipAddress, this->chatter->serverSocket.portNumber);
+		Packet* packet = new Packet(0, Packet::ID_FINISH, "");
+
+		// 3.2. 모든 클라이언트들에게 송신하다.
+		this->chatter->serverSocket.SendDataAll(packet);
+
+		if (packet != 0) {
+			delete packet;
+		}
+	}
 }
 
 void ChattingForm::OnPaint() {

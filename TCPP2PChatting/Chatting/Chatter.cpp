@@ -11,6 +11,8 @@ Chatter::Chatter(ChattingForm* chattingForm)
 	: serverSocket(this) {
 	this->chattingForm = chattingForm;
 
+	this->onIsFinished = FALSE;
+
 	if (!AfxSocketInit()) //소켓 라이브러리 초기화
 	{
 		AfxMessageBox(_T("ERROR: 소켓 초기화 실패"));
@@ -59,9 +61,7 @@ bool Chatter::Call(string ipAddress, int portNumber) {
 
 void Chatter::Listen() {
 	//포트번호 : 포트포워딩 규칙 설정 시에 설정한 내부 포트 번호
-	CString internalIP = this->serverSocket.GetInternalIpAddress();
-	BOOL onIsSucceed = this->serverSocket.Create(2180, SOCK_STREAM, FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE,
-		(LPCTSTR)internalIP);
+	BOOL onIsSucceed = this->serverSocket.Create();
 	if (onIsSucceed == TRUE) //소켓 생성(바인드되는 포트번호, TCP 소켓 플래그)
 	{
 		if (!this->serverSocket.Listen()) //서버가 클라이언트의 접속을 받을 수 있는 상태로 설정

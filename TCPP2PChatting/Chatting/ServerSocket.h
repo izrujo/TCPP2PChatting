@@ -25,6 +25,9 @@ public:
 
 public:
 	CPtrList clientSockets;
+	CString ipAddress;
+	UINT portNumber;
+
 	Chatter* chatter;
 	PacketBag* packetBag;
 };

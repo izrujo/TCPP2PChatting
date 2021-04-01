@@ -82,6 +82,15 @@ void ServerSocket::OnAccept(int nErrorCode) {
 		// 2.4. 클라이언트에게 동기화 성공 메시지를 보낸다.
 		number = this->packetBag->GetLastNumber(Packet::ID_SYCACK);// ID_IP => ID_SYC
 
+		packetMessage.Format("%d:%d:%s:%d", 0, Packet::ID_SYCMY, (LPCTSTR)ipAddress, portNumber);
+		packet = new Packet((LPCTSTR)packetMessage);
+
+		newClient->SendData(packet);
+
+		if (packet != 0) {
+			delete packet;
+		}
+
 		packetMessage.Format("%d:%d:%s:%d", number + 1, Packet::ID_SYCACK, (LPCTSTR)ipAddress, portNumber);
 		packet = new Packet((LPCTSTR)packetMessage);
 
@@ -215,27 +224,6 @@ void ServerSocket::CloseClientSocket(ClientSocket* clientSocket) {
 		//2.4. 클라이언트 소켓을 없애다.
 		delete clientSocket; //삭제
 	}
-#if 0
-	Packet *packet;
-
-	CString socketAddress;
-	CString ipAddress;
-	UINT portNumber;
-	
-	// 1. 종료된 클라이언트의 소켓 주소를 읽는다. 소켓 주소 = IPAddress + PortNumber
-	clientSocket->GetPeerName(ipAddress, portNumber);
-	socketAddress.Format("%s:%d", (LPCTSTR)ipAddress, portNumber);
-
-	// 2. 페킷을 만든다.
-	packet = new Packet(0, Packet::ID_CLOSE, (LPCTSTR)socketAddress);
-
-	// 3. 모두에게 전달한다.
-	this->SendDataAll(packet);
-
-	if (packet != 0) {
-		delete packet;
-	}
-#endif
 }
 
 void ServerSocket::SendDataAll(Packet* packet) {
