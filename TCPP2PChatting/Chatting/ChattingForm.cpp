@@ -130,6 +130,7 @@ void ChattingForm::OnClose() {
 		if (packet != 0) {
 			delete packet;
 		}
+		this->chatter->onIsFinished = TRUE;
 	}
 }
 

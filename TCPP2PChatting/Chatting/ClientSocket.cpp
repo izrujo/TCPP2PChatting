@@ -151,7 +151,7 @@ void ClientSocket::OnReceive(int nErrorCode) {
 				viewer.View(content);
 			}
 			//3.6. 종료 패킷이 아니면
-			if (identifier != Packet::ID_FINISH && identifier != Packet::ID_FINISHACK) {
+			if (identifier != Packet::ID_SYCMY && identifier != Packet::ID_FINISH && identifier != Packet::ID_FINISHACK) {
 				// 3.6.1. 모두에게 전달하다.
 				serverSocket->SendDataAll(packet);
 				//3.6.2. 패킷 가방에 패킷을 추가하다.
