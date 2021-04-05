@@ -39,7 +39,10 @@ void ClientSocket::OnClose(int nErrorCode) {
 }
 
 void ClientSocket::OnReceive(int nErrorCode) {
-	ServerSocket* serverSocket = (ServerSocket*)this->serverSocket;
+	ClientSocket* client = NULL;
+
+	POSITION previous = NULL;
+	POSITION current;
 
 	CString socketAddress;
 	UINT socketPortNumber;
@@ -50,6 +53,8 @@ void ClientSocket::OnReceive(int nErrorCode) {
 	string ipAddress;
 	Long portNumber;
 	Long number;
+
+	BOOL onIsFinding = FALSE;
 
 	TCHAR buffer[1024];
 	//1. 패킷을 받다.
@@ -73,8 +78,24 @@ void ClientSocket::OnReceive(int nErrorCode) {
 				// 3.1.1. 패킷에서 IP 정보와 port 정보를 읽는다.
 				packet->GetIPInformations(&ipAddress, &portNumber);
 				
-				// 3.1.2. 클라이언트 소켓을 만든다.
-				this->serverSocket->chatter->Call(ipAddress, portNumber);
+				// 3.1.2. 기존에 있는 클라이언트인지 확인한다.
+				current = this->serverSocket->clientSockets.GetHeadPosition();
+				while (previous != current && current != NULL && onIsFinding != TRUE) {
+					client = (ClientSocket*)this->serverSocket->clientSockets.GetAt(current);
+
+					client->GetPeerName(otherIPAddress, otherPortNumber);
+					if (ipAddress.compare((LPCTSTR)otherIPAddress) == 0 && portNumber == otherPortNumber) {
+						onIsFinding = TRUE;
+					}
+
+					previous = current;
+					this->serverSocket->clientSockets.GetNext(current);
+				}
+
+				// 3.1.3. 기존에 있는 클라이언트가 아니면 임시 연결을 한다.
+				if (onIsFinding != TRUE) {
+					this->serverSocket->chatter->Call(ipAddress, portNumber);
+				}
 			}
 			// 3.2. 클라이언트 정보 동기화 성공 메시지이면
 			else if (identifier == Packet::ID_SYCACK) {
@@ -163,15 +184,19 @@ void ClientSocket::OnReceive(int nErrorCode) {
 	CSocket::OnReceive(nErrorCode);
 }
 
-void ClientSocket::SendData(Packet* packet) {
+INT ClientSocket::SendData(Packet* packet) {
+	INT ret;
+
 	TCHAR(*buffer);
 	LONG len;
 	//1. 본 클라이언트 소켓과 연결된 상대방의 클라이언트 소켓에 데이터를 보내다.
 	packet->GetPacketMessage(&buffer, &len);
 
-	this->Send(buffer, len);
+	ret = this->Send(buffer, len);
 
 	if (buffer != 0) {
 		delete[] buffer;
 	}
+
+	return ret;
 }

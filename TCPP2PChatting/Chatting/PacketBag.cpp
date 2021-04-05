@@ -109,13 +109,21 @@ Long PacketBag::Find(Packet::IDENTIFY identify, Long number) {
 	return index;
 }
 
-Long PacketBag::FindIP(string ipInformation) {
+Long PacketBag::Find(string socketAddress) {
+	Long index;
+
+	index = this->packets.LinearSearchUnique(&socketAddress, CompareIpInformations);
+
+	return index;
+}
+
+Long PacketBag::FindNumber(string socketAddress) {
 	Long number = 0;
 	Long index;
 
 	Packet* packet;
 
-	index = this->packets.LinearSearchUnique(&ipInformation, CompareIpInformations);
+	index = this->packets.LinearSearchUnique(&socketAddress, CompareIpInformations);
 	
 	if (index > -1) {
 		packet = this->packets.GetAt(index);

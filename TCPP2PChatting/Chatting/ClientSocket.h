@@ -16,7 +16,7 @@ public:
 	void SetServerSocket(ServerSocket* serverSocket);
 	virtual void OnClose(int nErrorCode);
 	virtual void OnReceive(int nErrorCode);
-	void SendData(Packet* packet);
+	INT SendData(Packet* packet);
 
 public:
 	ServerSocket* serverSocket;

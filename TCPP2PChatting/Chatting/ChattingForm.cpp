@@ -38,7 +38,7 @@ ChattingForm::ChattingForm() {
 	this->chatter = NULL;
 	this->sendButton = NULL;
 
-	this->ipAddress = "121.138.194.9";//"14.32.96.30";
+	this->ipAddress = "121.138.194.196";//"14.32.96.30";
 	this->portNumber = 2180;
 }
 
@@ -92,9 +92,8 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	this->chatter->Listen();
 
-	//ClientSocket tempClient;
-	//tempClient.Create(this->portNumber, SOCK_STREAM, this->ipAddress.c_str());
-	//tempClient.Connect(this->ipAddress.c_str(), this->portNumber);
+	// 콜을 임시 연결로 수정하고 accept에 실제로 연결을 처리한다.
+	//this->chatter->Call(this->ipAddress.c_str(), this->portNumber);
 
 	return 0;
 }

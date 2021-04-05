@@ -14,7 +14,8 @@ public:
 	Long Remove(Long index);
 	Packet* GetAt(Long index);
 	Long Find(Packet::IDENTIFY identify, Long number);
-	Long FindIP(string ipInformation);
+	Long Find(string socketAddress);
+	Long FindNumber(string socketAddress);
 	Long GetLastNumber(Packet::IDENTIFY identify);
 
 public:
