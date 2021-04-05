@@ -36,9 +36,12 @@ Chatter& Chatter::operator=(const Chatter& source) {
 }
 
 bool Chatter::Call(string ipAddress, int portNumber) {
+	CString internalIP = this->serverSocket.GetInternalIpAddress();
+
 	ClientSocket tempClient;
-	tempClient.Create(portNumber, SOCK_STREAM, ipAddress.c_str());
+	tempClient.Create(80, SOCK_STREAM, (LPCTSTR)internalIP);
 	bool isConnected = tempClient.Connect(ipAddress.c_str(), portNumber);
+	DWORD error = GetLastError();
 
 	return isConnected;
 }
