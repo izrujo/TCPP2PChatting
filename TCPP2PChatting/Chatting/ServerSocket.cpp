@@ -73,7 +73,7 @@ void ServerSocket::OnAccept(int nErrorCode) {
 	BOOL onIsFinding = FALSE;
 
 	// 1. 클라이언트 소켓을 받아들인다.
-	onIsSucceed = Accept(tempClient);
+	onIsSucceed = Accept(tempClient);// ㅇㅇ
 
 	// 2. 클라이언트 소켓을 받아들이는데 성공하면
 	if (onIsSucceed == TRUE) {
