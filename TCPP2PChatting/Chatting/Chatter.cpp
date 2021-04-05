@@ -36,12 +36,25 @@ Chatter& Chatter::operator=(const Chatter& source) {
 }
 
 bool Chatter::Call(string ipAddress, int portNumber) {
-	CString internalIP = this->serverSocket.GetInternalIpAddress();
-
-	ClientSocket tempClient;
-	tempClient.Create(80, SOCK_STREAM, (LPCTSTR)internalIP);
-	bool isConnected = tempClient.Connect(ipAddress.c_str(), portNumber);
-	DWORD error = GetLastError();
+	//1. 클라이언트 소켓을 생성하다.
+	ClientSocket* clientSocket = new ClientSocket;
+	clientSocket->Create(portNumber, SOCK_STREAM, ipAddress.c_str());
+	//2. 클라이언트 소켓을 연결하다.
+	bool isConnected = clientSocket->Connect(ipAddress.c_str(), portNumber);
+	//3. 연결에 성공했으면
+	if (isConnected == true) {
+		//3.1. 서버 소켓의 리스트에 추가하다.
+		this->serverSocket.clientSockets.AddTail(clientSocket);
+		//3.2. 클라이언트 소켓의 서버 소켓을 설정하다.
+		clientSocket->SetServerSocket(&this->serverSocket);
+	}
+	//4. 연결에 실패했으면
+	else {
+		//4.1. 클라이언트 소켓을 닫다.
+		clientSocket->Close();
+		//4.2. 클라이언트 소켓을 없애다.
+		delete clientSocket;
+	}
 
 	return isConnected;
 }
