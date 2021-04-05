@@ -94,8 +94,8 @@ int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	// 콜을 임시 연결로 수정하고 accept에 실제로 연결을 처리한다. 연결할땐 내부, 만들땐 외부
 	//ClientSocket tempClient;
-	//tempClient.Create(this->portNumber, SOCK_STREAM, this->ipAddress.c_str());
-	//tempClient.Connect(this->ipAddress.c_str(), this->portNumber);
+	//tempClient.Create();
+	//BOOL ret = tempClient.Connect(this->ipAddress.c_str(), this->portNumber);
 
 	return 0;
 }
