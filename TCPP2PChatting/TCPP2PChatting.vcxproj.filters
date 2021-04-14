@@ -169,6 +169,9 @@
     <ClCompile Include="TextEditor\GlyphMaker.cpp">
       <Filter>TextEditor</Filter>
     </ClCompile>
+    <ClCompile Include="Chatting\ProxyServerSocket.cpp">
+      <Filter>Chatting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextEditor\Caret.h">
@@ -329,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="TextEditor\GlyphMaker.h">
       <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Chatting\ProxyServerSocket.h">
+      <Filter>Chatting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,9 +37,9 @@ ChattingForm::ChattingForm() {
 	this->chattingEdit = NULL;
 	this->chatter = NULL;
 	this->sendButton = NULL;
-
-	this->ipAddress = "121.138.194.196";//"14.32.96.30";
-	this->portNumber = 2180;
+	// 박컴 도메인 IP주소와 포트 번호로 가상 서버를 연다. 나중에 Proxy Server Socket을 하나 만들기.
+	this->ipAddress = "222.231.2.20";//"121.138.194.196";"14.32.96.30";
+	this->portNumber = 2180; // 채팅 포트를 2180으로 설정
 }
 
 int ChattingForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {

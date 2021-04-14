@@ -29,6 +29,7 @@
     <ClCompile Include="Chatting\KeyActionFactory.cpp" />
     <ClCompile Include="Chatting\KeyActions.cpp" />
     <ClCompile Include="Chatting\PacketBag.cpp" />
+    <ClCompile Include="Chatting\ProxyServerSocket.cpp" />
     <ClCompile Include="Chatting\ServerSocket.cpp" />
     <ClCompile Include="Chatting\Packet.cpp" />
     <ClCompile Include="Chatting\Viewer.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Chatting\KeyActionFactory.h" />
     <ClInclude Include="Chatting\KeyActions.h" />
     <ClInclude Include="Chatting\PacketBag.h" />
+    <ClInclude Include="Chatting\ProxyServerSocket.h" />
     <ClInclude Include="Chatting\ServerSocket.h" />
     <ClInclude Include="Chatting\Packet.h" />
     <ClInclude Include="Chatting\resource.h" />

@@ -310,6 +310,40 @@ CString ServerSocket::GetInternalIpAddress() {
 CString ServerSocket::GetExternalIpAddress() {// 외부 IP는 웹과 통신하여 알아내야 한다. mfc에 기능이 없는듯 하다.
 	CString outsideIpAddress;
 
+	FILE* file;
+	char output[512] = { '\0' };
+	const char* command = "nslookup myip.opendns.com resolver1.opendns.com";
+
+	bool onIsFinded = false;
+
+	file = _popen(command, "r");
+	fread(output, 1, sizeof(output), file);
+	fclose(file);
+
+	string result = output;
+
+	printf("%s\n", result.c_str());
+
+	// (UnKnown)을 찾아봄 공인 IP를 찾지 못하면 찾지 못했다고 알린다.
+	LONG index = result.find("UnKnown");
+	if (index < string::npos) {
+		onIsFinded = true;
+	}
+	// 공인 IP만 잘라낸다.
+	CHAR it;
+	LONG i = result.length();
+	while (i > 0 && onIsFinded != true) {
+		it = result[i];
+		if (it == ' ') {
+			onIsFinded = true;
+		}
+		i--;
+	}
+	outsideIpAddress = "ERROR";
+	if (index >= string::npos) {
+		outsideIpAddress = result.substr(i + 2, result.length() - (i + 2)).c_str();
+	}
+
 	return outsideIpAddress;
 }
 
